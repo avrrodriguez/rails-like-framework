@@ -8,7 +8,7 @@ class CreateTablePosts < Sequel::Migration
     end
   end
 
-  def up
+  def down
     drop_table :posts
   end
 end

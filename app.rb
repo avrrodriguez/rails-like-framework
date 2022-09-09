@@ -21,13 +21,16 @@ Dir[File.join(File.dirname(__FILE__), "lib", "*.rb")].each { |file| require file
 Dir[File.join(File.dirname(__FILE__), "controllers", "**", "*.rb")].each { |file| require file }
 
 # Connecting all our framework's files
-Dir[File.join(File.dirname(__FILE__), "app", "**", "*.rb")].each { |file| require file }
+# Dir[File.join(File.dirname(__FILE__), "app", "**", "*.rb")].each { |file| require file }
 
 # If there is a database connection, running all the migrations
 if DB
   puts "Migrations files running"
   Sequel::Migrator.run(DB, File.join(File.dirname(__FILE__), "app", "db", "migrations"))
 end
+
+require "#{Dir[File.join(File.dirname(__FILE__), "app", "**", "post.rb")][0]}"
+require "#{Dir[File.join(File.dirname(__FILE__), "app", "**", "002_add_some_posts.rb")][0]}"
 
 class App
   attr_reader :router
