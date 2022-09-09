@@ -1,0 +1,5 @@
+### Connection check
+GET http://localhost:9292
+
+### Posts Index Action
+GET http://localhost:9292/posts
