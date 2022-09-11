@@ -26,6 +26,10 @@ if DB
   Sequel::Migrator.run(DB, File.join(File.dirname(__FILE__), "app", "db", "migrations"))
 end
 
+require Dir[File.join(File.dirname(__FILE__), "app", "**", "post.rb")][0]
+
+require Dir[File.join(File.dirname(__FILE__), "app", "**", "add_posts.rb")][0]
+
 class App
   attr_reader :router
 
