@@ -26,9 +26,14 @@ if DB
   Sequel::Migrator.run(DB, File.join(File.dirname(__FILE__), "app", "db", "migrations"))
 end
 
-require Dir[File.join(File.dirname(__FILE__), "app", "**", "post.rb")][0]
+# Connecting post controller to database
+Dir[File.join(File.dirname(__FILE__), "app", "**", "post.rb")].each {
+  |file|
+  require file
+}
 
-require Dir[File.join(File.dirname(__FILE__), "app", "**", "add_posts.rb")][0]
+# Addings posts after post controller is connected to database
+Dir[File.join(File.dirname(__FILE__), "app", "**", "add_posts.rb")].each { |file| require file }
 
 class App
   attr_reader :router
