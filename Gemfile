@@ -9,3 +9,5 @@ gem "slim"
 
 gem "sequel"
 gem "sqlite3"
+
+gem "concurrent-ruby"

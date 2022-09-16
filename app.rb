@@ -23,7 +23,7 @@ Dir[File.join(File.dirname(__FILE__), "controllers", "**", "*.rb")].each { |file
 # If there is a database connection, running all the migrations
 if DB
   puts "Migrations files running"
-  Sequel::Migrator.run(DB, File.join(File.dirname(__FILE__), "app", "db", "migrations"))
+  Sequel::Migrator.run(DB, File.join(File.dirname(__FILE__), "app", "db", "migrations"), :use_transactions => false)
 end
 
 # Connecting post controller to database
