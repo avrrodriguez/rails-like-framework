@@ -11,12 +11,21 @@ class Controller
     send(action)
     self.status = 200
     self.headers = { "Content-Type" => "text/html" }
-    self.content = [template.render(self)]
+    if @action.to_s == "index"
+      self.content = [template.render(self)]
+    elsif @action.to_s == "show"
+      self.content = [erb_file(self) { }]
+    end
     self
   end
 
   def template
     Slim::Template.new(File.join(App.root, "app", "views", "#{self.name}", "#{self.action}.slim"))
+  end
+
+  def erb_file(context)
+    file = File.read(File.join(App.root, "app", "views", "#{@name}", "#{@action}.html.erb"))
+    ERB.new(file).result(binding)
   end
 
   def not_found

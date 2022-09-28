@@ -33,7 +33,7 @@ Dir[File.join(File.dirname(__FILE__), "app", "**", "post.rb")].each {
 }
 
 # Addings posts after post controller is connected to database
-Dir[File.join(File.dirname(__FILE__), "app", "**", "add_posts.rb")].each { |file| require file }
+# Dir[File.join(File.dirname(__FILE__), "app", "**", "add_posts.rb")].each { |file| require file }
 
 class App
   attr_reader :router
