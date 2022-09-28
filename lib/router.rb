@@ -7,8 +7,12 @@ class Router
 
   def resolve(env)
     path = env["REQUEST_PATH"]
+    puts path
     if routes.key?(path)
       ctrl(routes[path]).call
+    elsif path[-1].to_i.integer?
+      @id = path[-1]
+      ctrl(routes["#{path[0..-3]}/:id"]).call
     else
       Controller.new.not_found
     end
@@ -20,6 +24,7 @@ class Router
 
   private def ctrl(string)
     ctrl_name, action_name = string.split("#")
+
     klass = Object.const_get("#{ctrl_name.capitalize}Controller")
     klass.new(name: ctrl_name, action: action_name.to_sym)
   end

@@ -8,10 +8,15 @@
   </head>
 
   <body>
+    <% @posts.each do |post| %>
     <div>
-      <%= @post.title %>
-      <%= @post.content %>
+      <%= post.id %>
+      <%= post.title %>
+      <%= post.content %>
+      <a href="/posts/<%= post.id %>">go to post</a>
+      <hr>
     </div>
+    <% end %>
     
     <%= yield %>
   </body>

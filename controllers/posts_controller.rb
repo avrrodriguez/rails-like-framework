@@ -4,6 +4,8 @@ class PostsController < Controller
   end
 
   def show
-    @posts = Post.all
+    puts content
+    puts "here2"
+    @post = Post.find_by(id: params[:id])
   end
 end

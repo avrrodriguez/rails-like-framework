@@ -2,28 +2,25 @@ class Controller
   attr_reader :name, :action
   attr_accessor :status, :headers, :content
 
-  def initialize(name: nil, action: nil)
+  def initialize(name: nil, action: nil, id: nil)
     @name = name
     @action = action
+    @id = id
   end
 
   def call
     send(action)
     self.status = 200
     self.headers = { "Content-Type" => "text/html" }
-    if @action.to_s == "index"
-      self.content = [template.render(self)]
-    elsif @action.to_s == "show"
-      self.content = [erb_file(self) { }]
-    end
+    self.content = [erb_file(self) { }]
+
     self
   end
 
-  def template
-    Slim::Template.new(File.join(App.root, "app", "views", "#{self.name}", "#{self.action}.slim"))
-  end
-
-  def erb_file(context)
+  def erb_file(content)
+    puts @id
+    puts @name
+    puts @action
     file = File.read(File.join(App.root, "app", "views", "#{@name}", "#{@action}.html.erb"))
     ERB.new(file).result(binding)
   end
