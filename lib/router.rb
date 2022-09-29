@@ -6,7 +6,13 @@ class Router
   end
 
   def resolve(env)
+    # create path, new get path and create post path to posts
+    # in yml routes file key is path, hash with key method and controller#action as value
+    # change code here so that it gets the controller#action
+    # routes[path][method]
+
     path = env["REQUEST_PATH"]
+    method = env["REQUEST_METHOD"]
 
     if path.length > 1
       path_arr = path.scan(/(\/)(\w+)/)

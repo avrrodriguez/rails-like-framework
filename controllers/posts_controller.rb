@@ -6,4 +6,11 @@ class PostsController < Controller
   def show
     @post = Post.find(id: params[:id])
   end
+
+  def create
+    @post = Post.create(
+      title: params[:title],
+      content: params[:content],
+    )
+  end
 end

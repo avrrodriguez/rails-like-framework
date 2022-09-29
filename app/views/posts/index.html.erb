@@ -10,13 +10,11 @@
   <body>
     <% @posts.each do |post| %>
     <div>
-      <h1>
-      <%= post.title %>
-      </h1>
-      <p>
-      <%= post.content %>
-      </p>
+      <h1><%= post.title %></h1>
+      <p><%= post.content %></p>
+      
       <a href="/posts/<%= post.id %>">go to post</a>
+
       <hr>
     </div>
     <% end %>
