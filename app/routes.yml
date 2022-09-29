@@ -1,4 +1,5 @@
-"/" : "main#index"
+"/" : "posts#index"
+
 "/hello": "main#hello"
 "/posts": "posts#index"
 "/posts/:id": "posts#show"

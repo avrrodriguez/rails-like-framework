@@ -7,13 +7,21 @@ class Router
 
   def resolve(env)
     path = env["REQUEST_PATH"]
-    puts path
+
+    if path.length > 1
+      path_arr = path.scan(/(\/)(\w+)/)
+      route_path = path_arr[0][0] + path_arr[0][1]
+    else
+      route_path = path
+    end
+
     params = {}
+
     if routes.key?(path)
-      ctrl(routes[path], params).call
-    elsif path[-1].to_i.integer?
-      params[:id] = path[-1].to_i
-      ctrl(routes["#{path[0..-3]}/:id"], params).call
+      ctrl(routes[route_path], params).call
+    elsif path_arr[1]
+      params[:id] = path_arr[1][1].to_i
+      ctrl(routes["#{route_path}/:id"], params).call
     else
       Controller.new.not_found
     end
