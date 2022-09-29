@@ -1,11 +1,11 @@
 class Controller
-  attr_reader :name, :action
+  attr_reader :name, :action, :params
   attr_accessor :status, :headers, :content
 
-  def initialize(name: nil, action: nil, id: nil)
+  def initialize(name: nil, action: nil, params: nil)
     @name = name
     @action = action
-    @id = id
+    @params = params
   end
 
   def call
@@ -18,9 +18,6 @@ class Controller
   end
 
   def erb_file(content)
-    puts @id
-    puts @name
-    puts @action
     file = File.read(File.join(App.root, "app", "views", "#{@name}", "#{@action}.html.erb"))
     ERB.new(file).result(binding)
   end

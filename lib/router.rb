@@ -8,11 +8,12 @@ class Router
   def resolve(env)
     path = env["REQUEST_PATH"]
     puts path
+    params = {}
     if routes.key?(path)
-      ctrl(routes[path]).call
+      ctrl(routes[path], params).call
     elsif path[-1].to_i.integer?
-      @id = path[-1]
-      ctrl(routes["#{path[0..-3]}/:id"]).call
+      params[:id] = path[-1].to_i
+      ctrl(routes["#{path[0..-3]}/:id"], params).call
     else
       Controller.new.not_found
     end
@@ -22,10 +23,10 @@ class Router
     Controller.new.internal_error
   end
 
-  private def ctrl(string)
+  private def ctrl(string, params)
     ctrl_name, action_name = string.split("#")
 
     klass = Object.const_get("#{ctrl_name.capitalize}Controller")
-    klass.new(name: ctrl_name, action: action_name.to_sym)
+    klass.new(name: ctrl_name, action: action_name.to_sym, params: params)
   end
 end
