@@ -9,14 +9,14 @@ class Router
     path = env["REQUEST_PATH"]
     method = env["REQUEST_METHOD"]
 
-    puts env
+    request = Rack::Request.new(env)
 
     if path.length > 1
       path_arr = path.scan(/(\/)(\w+)/)
       route_path = path_arr[0][0] + path_arr[0][1]
     end
 
-    params = {}
+    params = request.params
 
     if routes.key?(path)
       ctrl(routes[path].select { |value| value[method] }[0][method], params).call

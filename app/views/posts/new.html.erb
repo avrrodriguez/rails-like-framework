@@ -7,15 +7,17 @@
     </style>
   </head>
 
-  <body>
-    <form method="post" action="/posts">
-      <label for="title">title</label>
-      <input type="text" id="title" name="title"><br>
-      <label for="content">content</label>
-      <input type="text" id="content" name="content"><br>
-      <input type="submit" value="Submit">
+  <form action="/posts" method="POST">
+      <div>
+        <label for="title">title</label>
+        <input type="text" id="title" name="title"><br>
+      </div>
+      <div> 
+        <label for="content">content</label>
+        <input type="text" id="content" name="content"><br>
+      </div>
+      <div>
+        <input type="submit" value="Submit">
+      </div>
     </form>
-    
-    <%= yield %>
-  </body>
 </html>

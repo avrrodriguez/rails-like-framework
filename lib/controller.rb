@@ -1,6 +1,6 @@
 class Controller
-  attr_reader :name, :action, :params
-  attr_accessor :status, :headers, :content
+  attr_reader :name, :params
+  attr_accessor :status, :headers, :content, :action
 
   def initialize(name: nil, action: nil, params: nil)
     @name = name

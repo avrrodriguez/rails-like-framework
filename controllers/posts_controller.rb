@@ -14,9 +14,11 @@ class PostsController < Controller
 
   def create
     puts "Did we get here?"
+    puts params
     @post = Post.create(
-      title: params[:title],
-      content: params[:content],
+      title: params["title"],
+      content: params["content"],
     )
+    @action = "show"
   end
 end
