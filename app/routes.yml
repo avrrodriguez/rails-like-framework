@@ -1,5 +1,17 @@
-"/" : "posts#index"
+"/": 
+  - 
+    GET: "posts#index"
 
-"/hello": "main#hello"
-"/posts": "posts#index"
-"/posts/:id": "posts#show"
+"/posts/new":
+  -
+    GET: "posts#new"
+
+/posts: 
+  - 
+    GET: "posts#index"
+  - 
+    POST: "posts#create"
+
+"/posts/:id": 
+  - 
+    GET: "posts#show"

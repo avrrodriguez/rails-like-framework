@@ -6,28 +6,23 @@ class Router
   end
 
   def resolve(env)
-    # create path, new get path and create post path to posts
-    # in yml routes file key is path, hash with key method and controller#action as value
-    # change code here so that it gets the controller#action
-    # routes[path][method]
-
     path = env["REQUEST_PATH"]
     method = env["REQUEST_METHOD"]
+
+    puts env
 
     if path.length > 1
       path_arr = path.scan(/(\/)(\w+)/)
       route_path = path_arr[0][0] + path_arr[0][1]
-    else
-      route_path = path
     end
 
     params = {}
 
     if routes.key?(path)
-      ctrl(routes[route_path], params).call
+      ctrl(routes[path].select { |value| value[method] }[0][method], params).call
     elsif path_arr[1]
       params[:id] = path_arr[1][1].to_i
-      ctrl(routes["#{route_path}/:id"], params).call
+      ctrl(routes["#{route_path}/:id"][0][method], params).call
     else
       Controller.new.not_found
     end
