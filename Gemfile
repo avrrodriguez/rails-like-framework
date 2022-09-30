@@ -9,6 +9,4 @@ gem "puma"
 gem "sequel"
 gem "sqlite3"
 
-gem "concurrent-ruby"
-
 gem "erb"
