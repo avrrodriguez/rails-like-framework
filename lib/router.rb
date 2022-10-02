@@ -22,7 +22,7 @@ class Router
       ctrl(routes[path].select { |value| value[method] }[0][method], params).call
     elsif path_arr[1]
       params[:id] = path_arr[1][1].to_i
-      ctrl(routes["#{route_path}/:id"][0][method], params).call
+      ctrl(routes["#{route_path}/:id"].select { |value| value[method] }[0][method], params).call
     else
       Controller.new.not_found
     end

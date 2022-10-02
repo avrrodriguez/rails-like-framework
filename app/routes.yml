@@ -15,3 +15,7 @@
 "/posts/:id": 
   - 
     GET: "posts#show"
+  -
+    DELETE: "posts#delete"
+  -
+    PATCH: "posts#update"
