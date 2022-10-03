@@ -16,24 +16,26 @@ class PostsController < Controller
       title: params["title"],
       content: params["content"],
     )
-    @action = "show"
+    redirect_to "show"
   end
 
   def delete
     @post = Post.find(id: params[:id])
     @post.destroy
 
-    @action = "index"
-    @posts = Post.all
+    redirect_to "index"
+  end
+
+  def edit
+    @post = Post.find(id: params["id"])
   end
 
   def update
     @post = Post.find(id: params[:id])
-    @post.title = params["title"]
-    @post.content = params["content"]
+    @post.title = params["title"] || @post.title
+    @post.content = params["content"] || @post.content
     @post.save
 
-    @action = "index"
-    @posts = Post.all
+    redirect_to "index"
   end
 end

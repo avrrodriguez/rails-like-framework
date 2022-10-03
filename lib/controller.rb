@@ -34,4 +34,9 @@ class Controller
     self.headers = {}
     self.content = ["Internal error"]
   end
+
+  def redirect_to(path)
+    @action = path
+    @posts = Post.all
+  end
 end
