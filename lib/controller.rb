@@ -39,4 +39,13 @@ class Controller
     @action = path
     @posts = Post.all
   end
+
+  def form_with(url, method)
+    "<form action=#{url} method='post'> 
+      <input name='_method' type='hidden' value='#{method}' />"
+  end
+
+  def form_end
+    "</form>"
+  end
 end
