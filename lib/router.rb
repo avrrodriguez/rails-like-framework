@@ -17,7 +17,7 @@ class Router
 
     params = request.params
 
-    puts env
+    # puts env
     puts request
     puts params
 

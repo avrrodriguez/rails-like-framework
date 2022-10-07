@@ -1,17 +1,12 @@
 
-<%= form_with("/posts/#{@post.id}") %>
-  <div>
-    <label for="title">title</label>
-    <input type="text" id="title" name="title" value=<%= @post.title %>><br>
+<%= form_with("/posts/#{@post.id}", method="patch", writing =
+  "<div>
+    <label for='title'>title</label>
+    <input type='text' id='title' name='title' value=#{@post.title}><br>
   </div>
   <div> 
-    <label for="content">content</label>
-    <input type="text" id="content" name="content" value=<%= @post.content %>><br>
-  </div>
-  <div>
-    <input type="submit" value="Submit">
-  </div>
-<%= form_end %>
-
+    <label for='content'>content</label>
+    <input type='text' id='content' name='content' value=#{@post.content}><br>
+  </div>") %>
 
 <%= yield %>

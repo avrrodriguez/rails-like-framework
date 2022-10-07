@@ -15,10 +15,7 @@
       <p><%= @post.content %></p>
     </div>
 
-    <form action="/posts/<%= @post.id %>" method="POST">
-      <input type="hidden" name="_method" value="DELETE" />
-      <input type="submit" value="Delete">
-    </form>
+    <%= form_with("/posts/#{@post.id}", method="delete")%>
 
     <a href="/posts/edit?id=<%= @post.id %>">Edit post</a>
     

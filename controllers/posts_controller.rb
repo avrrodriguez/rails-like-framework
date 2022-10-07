@@ -32,8 +32,8 @@ class PostsController < Controller
 
   def update
     @post = Post.find(id: params[:id])
-    @post.title = params["title"] || @post.title
-    @post.content = params["content"] || @post.content
+    @post.title = params["title"]
+    @post.content = params["content"]
     @post.save
 
     redirect_to "index"
