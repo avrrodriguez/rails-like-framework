@@ -40,8 +40,13 @@ class Controller
     @posts = Post.all
   end
 
-  def form_with(url, method)
-    "<form action=#{url} method='post'> 
+  def form_with(url, method = "get")
+    if @action.to_s == "edit"
+      method = "patch"
+    elsif @action.to_s == "delete"
+      method = "delete"
+    end
+    "<form action='#{url}' method='post'> 
       <input name='_method' type='hidden' value='#{method}' />"
   end
 

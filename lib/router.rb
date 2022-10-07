@@ -8,7 +8,6 @@ class Router
   def resolve(env)
     path = env["REQUEST_PATH"]
     method = env["REQUEST_METHOD"]
-
     request = Rack::Request.new(env)
 
     if path.length > 1
@@ -18,6 +17,7 @@ class Router
 
     params = request.params
 
+    puts env
     puts request
     puts params
 

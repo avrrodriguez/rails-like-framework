@@ -8,12 +8,12 @@
   </head>
 
   <body>
+    <a href="/posts">back to all posts</a>
+    <h1>Post</h1>
     <div>
-      <h1><%= @post.title %></h1>
+      <h2><%= @post.title %></h1>
       <p><%= @post.content %></p>
     </div>
-
-    <a href="/posts">back to all posts</a>
 
     <form action="/posts/<%= @post.id %>" method="POST">
       <input type="hidden" name="_method" value="DELETE" />
