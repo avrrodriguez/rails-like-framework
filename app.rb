@@ -1,5 +1,4 @@
 require "yaml"
-
 require "./lib/router"
 
 ROUTES = YAML.load(File.read(File.join(File.dirname(__FILE__), "app", "routes.yml")))
@@ -28,6 +27,12 @@ end
 
 # Connecting post controller to database
 Dir[File.join(File.dirname(__FILE__), "app", "**", "post.rb")].each {
+  |file|
+  require file
+}
+
+# DB functions
+Dir[File.join(File.dirname(__FILE__), "app", "**", "db_functions.rb")].each {
   |file|
   require file
 }
