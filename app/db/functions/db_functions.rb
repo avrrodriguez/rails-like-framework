@@ -89,9 +89,30 @@ class Functions
     DB.run "#{instance}"
   end
 
-  def select_query
+  def select_query(column = "*", *options)
     puts "selecting query"
-    select_string = "SELECT * FROM #{@table_name}"
+    select_string = "SELECT #{column} FROM #{@table_name}"
+    if options[:where]
+      select_string += "WHERE #{options[:where]}"
+    end
+    if options[:group_by]
+      select_string += "GROUP BY #{options[:group_by]}"
+    end
+    if options[:having]
+      select_string += "HAVING #{options[:having]}"
+    end
+    if options[:order_by]
+      select_string += "ORDER BY #{options[:order_by]}"
+    end
+    if options[:limit]
+      select_string += "LIMIT #{options[:limit]}"
+      if options[:offset]
+        select_string += "OFFSET #{options[:offset]}"
+      end
+    end
+
+    puts select_string
+
     DB.fetch("#{select_string}") do |row|
       p row
     end
@@ -99,6 +120,7 @@ class Functions
 end
 
 # add methods with functions, count, conditions? (get specific rows of columns), group by (groups rows based on something)
+# add where, group by, etc in the select_query using if statements
 
 puts "Accessing table in database"
 table = Functions.new()
