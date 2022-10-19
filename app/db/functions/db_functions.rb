@@ -80,16 +80,16 @@ class Functions
     to_schemas
   end
 
-  def insert_row(columns, options)
+  def insert_row(columns = "", options)
     puts "inserting row into table"
     instance = "INSERT INTO #{@table_name} 
-    (#{columns}) 
+    #{columns}
     VALUES (#{options[0].to_i}, '#{options[1]}', '#{options[2]}', #{options[3].to_i});"
     puts instance
     DB.run "#{instance}"
   end
 
-  def select_query(column = "*", *options)
+  def select_query(column = "*", options = {})
     puts "selecting query"
     select_string = "SELECT #{column} FROM #{@table_name}"
     if options[:where]
@@ -124,8 +124,8 @@ end
 
 puts "Accessing table in database"
 table = Functions.new()
-table.name("posts")
-# table.insert_row("id, name, content, rating", [1, "Lola", "hi how are you", 3])
+table.name("comments")
+# table.insert_row(options = [3, "John", "yep here", 2])
 # table.add_column("rating", "INTEGER")
 # table.drop
 # table.create_table("comments", "id INTEGER PRIMARY KEY, name STRING, content TEXT")
