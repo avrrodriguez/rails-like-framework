@@ -57,7 +57,6 @@ class Functions
   def to_schemas
     puts "writing to schemas file"
 
-    # get_schema
     f = File.open("/Users/abrahamrodriguez/Desktop/Actualize/framework/blog/app/db/schemas.rb", "a")
     table_data = schema
     f.write("\n")
@@ -68,14 +67,44 @@ class Functions
 
     f.close
   end
+
+  def add_column(col_name, data_type, *options)
+    new_column = "ALTER TABLE #{@table_name} ADD #{col_name} #{data_type} #{options}"
+    DB.run "#{new_column}"
+    to_schemas
+  end
+
+  def drop_column(col_name)
+    drop_column = "ALTER TABLE #{@table_name} DROP #{col_name}"
+    DB.run "#{drop_column}"
+    to_schemas
+  end
+
+  def insert_row(columns, options)
+    puts "inserting row into table"
+    instance = "INSERT INTO #{@table_name} 
+    (#{columns}) 
+    VALUES (#{options[0].to_i}, '#{options[1]}', '#{options[2]}', #{options[3].to_i});"
+    puts instance
+    DB.run "#{instance}"
+  end
+
+  def select_query
+    puts "selecting query"
+    select_string = "SELECT * FROM #{@table_name}"
+    DB.fetch("#{select_string}") do |row|
+      p row
+    end
+  end
 end
 
 # add methods with functions, count, conditions? (get specific rows of columns), group by (groups rows based on something)
-# might want to add to schema the ability to put in some other document the schema of tables currently in database (could add that to create table instead of schema)
 
 puts "Accessing table in database"
 table = Functions.new()
-table.name("comments")
+table.name("posts")
+# table.insert_row("id, name, content, rating", [1, "Lola", "hi how are you", 3])
+# table.add_column("rating", "INTEGER")
 # table.drop
 # table.create_table("comments", "id INTEGER PRIMARY KEY, name STRING, content TEXT")
-# puts table.schema
+puts table.select_query
