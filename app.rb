@@ -25,8 +25,8 @@ if DB
   Sequel::Migrator.run(DB, File.join(File.dirname(__FILE__), "app", "db", "migrations"), :use_transactions => false)
 end
 
-# Connecting post controller to database
-Dir[File.join(File.dirname(__FILE__), "app", "**", "post.rb")].each {
+# Connecting controllers to database
+Dir[File.join(File.dirname(__FILE__), "app", "models", "**.rb")].each {
   |file|
   require file
 }

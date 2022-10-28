@@ -1,6 +1,6 @@
 require "sequel"
 
-class Functions
+class Functions < Sequel::Model(DB)
   def name(table_name)
     @table_name = table_name
   end
@@ -118,15 +118,3 @@ class Functions
     end
   end
 end
-
-# add methods with functions, count, conditions? (get specific rows of columns), group by (groups rows based on something)
-# add where, group by, etc in the select_query using if statements
-
-puts "Accessing table in database"
-table = Functions.new()
-table.name("comments")
-# table.insert_row(options = [3, "John", "yep here", 2])
-# table.add_column("rating", "INTEGER")
-# table.drop
-# table.create_table("comments", "id INTEGER PRIMARY KEY, name STRING, content TEXT")
-puts table.select_query
