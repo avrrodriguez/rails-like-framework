@@ -1,2 +1,2 @@
-class Post < Functions
+class Post < Sequel::Model(DB)
 end

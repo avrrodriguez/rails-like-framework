@@ -7,10 +7,8 @@ ROUTES = YAML.load(File.read(File.join(File.dirname(__FILE__), "app", "routes.ym
 db_config_file = File.join(File.dirname(__FILE__), "app", "database.yml")
 if File.exist?(db_config_file)
   config = YAML.load(File.read(db_config_file))
-  puts config
   DB = Sequel.connect(config)
   Sequel.extension :migration
-  puts "DB created"
 end
 
 # Connecting all our framework's classes
@@ -21,18 +19,17 @@ Dir[File.join(File.dirname(__FILE__), "controllers", "**", "*.rb")].each { |file
 
 # If there is a database connection, running all the migrations
 if DB
-  puts "Migrations files running"
   Sequel::Migrator.run(DB, File.join(File.dirname(__FILE__), "app", "db", "migrations"), :use_transactions => false)
 end
 
-# Connecting controllers to database
-Dir[File.join(File.dirname(__FILE__), "app", "models", "**.rb")].each {
+# DB functions
+Dir[File.join(File.dirname(__FILE__), "app", "**", "db_functions.rb")].each {
   |file|
   require file
 }
 
-# DB functions
-Dir[File.join(File.dirname(__FILE__), "app", "**", "db_functions.rb")].each {
+# Connecting controllers to database
+Dir[File.join(File.dirname(__FILE__), "app", "models", "**.rb")].each {
   |file|
   require file
 }

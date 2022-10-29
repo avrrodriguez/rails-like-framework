@@ -17,10 +17,6 @@ class Router
 
     params = request.params
 
-    # puts env
-    # puts request
-    # puts params
-
     if routes.key?(path)
       ctrl(routes[path].select { |value| value[method] }[0][method], params).call
     elsif path_arr[1]

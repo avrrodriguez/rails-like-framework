@@ -1,6 +1,6 @@
 require "sequel"
 
-class Functions < Sequel::Model(DB)
+class Functions
   def name(table_name)
     @table_name = table_name
   end
@@ -85,7 +85,7 @@ class Functions < Sequel::Model(DB)
     instance = "INSERT INTO #{@table_name} 
     #{columns}
     VALUES (#{options[0].to_i}, '#{options[1]}', '#{options[2]}', #{options[3].to_i});"
-    puts instance
+
     DB.run "#{instance}"
   end
 
@@ -110,8 +110,6 @@ class Functions < Sequel::Model(DB)
         select_string += "OFFSET #{options[:offset]}"
       end
     end
-
-    puts select_string
 
     DB.fetch("#{select_string}") do |row|
       p row
