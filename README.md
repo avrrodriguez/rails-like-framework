@@ -12,8 +12,6 @@ Using this framework one is able to add a controller with specific names, models
 - The database is sqlite3. 
 - Some Regex is used as well for formatting the front end requests.
 
-## Instructions
-
 ## How to use
 
 ### Start application
