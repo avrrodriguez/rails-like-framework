@@ -1,6 +1,6 @@
 # Rails-like Framework
 
-A clone of the Ruby on Rails framework using a blog application as an example.
+An MVC framework inspired by Ruby on Rails using a blog application as an example.
 
 ## Description
 
