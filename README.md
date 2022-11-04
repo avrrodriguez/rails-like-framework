@@ -24,15 +24,15 @@ Using this framework one is able to add a controller with specific names, models
 
 
 ### Creating models
-- Add file(s) in the models folder, file name should be singular form of table in database with the same name, inside should be a class with the same name as the folder, inheriting from Sequel::Model(DB). This is so the table in the database is connected to the model.
+- Add file(s) in the models folder, file name should be singular form of table in database with the same name, inside should be a class with the same name as the folder.
 
 
 ### Creating controllers
-- Add file(s) in controller folder, file should be named the same as the table(plural and lowercare) followed by _controller.rb. Inside the file should be a class with the name capitalized and the same as folder name but without the _, Example, class PostsController inside file posts_controller. The class inherits from Controller.
+- Add file(s) in controller folder, file should be named the same as the table(plural and lowercare) followed by _controller.rb. Inside the file should be a class with the name capitalized and the same as folder name but without the _, Example, class PostsController inside file posts_controller.
 
 
 ### Adding routes
-- The routes are already connected to the controller and are dynamic, so there is no need to write any extra code other than to enter the http verb, action, and controller.
+- The routes are already connected to the controller, there is no need to write any extra code other than to enter the http verb, action, and controller.
 - Inside the routes.yml is where routes are inputted, with the following format:
 ```
 	 "path":
@@ -41,10 +41,10 @@ Using this framework one is able to add a controller with specific names, models
 ```
 
 ### Creating Views
-- html and html.erb (the framework supports it) are placed within the views file, the user needs to create a folder with the name of the table it is connected to (in plural) and within that folder place the appropriate views files.
+- The user needs to create a folder with the name of the table it is connected to (in plural) and within that folder place the appropriate views files.
 
 
 ### Additional functionalities
 - The framework is capable of supporting crud applications.
 - Within the seed file, the user is capable of joining multiple tables, destroying tables, adding columns to tables, deleting columns from tables through the Functions class of required db_functions file.
-- The schemas of all tables in the database can be found in schema file, this file also changes when changes to table(s) are made.
+- The schemas of all tables in the database can be found in schema file.
