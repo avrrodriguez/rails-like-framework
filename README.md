@@ -4,7 +4,7 @@ A clone of the Ruby on Rails framework using a blog application as an example.
 
 ## Description
 
-Using this framework one is able to add a controller with specific names, models for a database in which to store information, and a html or some other file to render whatever the user wants to render. The framework already has the connection between the controller, views, and models. The way the controller establishes that connection is also dynamic, the user can give the controller whatever name it wants followed by "-controller" and the framework will be able to connect that to its appropriate model and views. 
+Using this framework one is able to add a controller with specific names, models for a database in which to store information, and a html or some other file to render whatever the user wants to render. The framework already has the connection between the controller, views, and models. 
 
 - This framework uses Ruby Programming Language. 
 - Rack is used to create the connection between the front-end and back-end. 
@@ -20,11 +20,20 @@ Using this framework one is able to add a controller with specific names, models
 ### To add table to database
 - Either create a migration file in the migrations folder
 	- done in the migration format, number of latest migration file number plus one for next number followed by _create_table, inside the file should have the same format as previous files.
-	- another way, inside the see file, create new Functions instance and then use the create_table function to create a new table in the format new_table.create_table(table_name, *options)
-
+	- another way, inside the seed file, create new Functions instance and then use the create_table function to create a new table, with the format newtable.create_table(table_name, *options). Options is optional, there you would include the column names and data types as a single string.
+```
+		new_table = Function.new
+		new_table.create_table(table_name, "id integer, title string, comments text")
+```
 
 ### Creating models
 - Add file(s) in the models folder, file name should be singular form of table in database with the same name, inside should be a class with the same name as the folder.
+```
+# post.rb
+class Post < Sequel::Model(DB)
+  insert code here
+end
+```
 
 
 ### Creating controllers
@@ -47,4 +56,23 @@ Using this framework one is able to add a controller with specific names, models
 ### Additional functionalities
 - The framework is capable of supporting crud applications.
 - Within the seed file, the user is capable of joining multiple tables, destroying tables, adding columns to tables, deleting columns from tables through the Functions class of required db_functions file.
+```
+table = Function.new
+table.name = "table_name"
+
+# drop table
+table.drop
+
+# join tables
+table.join(table1, table1_column, table2, table2_matching_column)
+
+# get table schema
+table.schema
+
+# add column
+table.add_column(column_name, data_type, *options) # options are constraints like primary key
+
+# delete_column
+table.drop_column(column_name)
+```
 - The schemas of all tables in the database can be found in schema file.
